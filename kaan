@@ -1,0 +1,41 @@
+public class Ogrencıler
+{
+    public int Id { get; set; }
+
+    [Required(ErrorMessage = "Ad alanı zorunludur.")]
+    [MaxLength(50, ErrorMessage = "Ad alanı en fazla 50 karakter olabilir.")]
+    public string FirstName { get; set; }
+
+    [Required(ErrorMessage = "Soyad alanı zorunludur.")]
+    [MaxLength(50, ErrorMessage = "Soyad alanı en fazla 50 karakter olabilir.")]
+    public string LastName { get; set; }
+
+    [Range(0, 150, ErrorMessage = "Yaş alanı 0-150 arasında olmalıdır.")]
+    public int Age { get; set; }
+}
+[HttpPost]
+public IActionResult Create(Person person)
+{
+    if (!ModelState.IsValid)
+    {
+        // ModelState.IsValid false ise, validasyon hataları var demektir
+        // Hataları döndürmek veya işlemi durdurmak için gerekli kodu ekleyebilirsiniz
+        return BadRequest(ModelState);
+    }
+
+    // Veriyi veritabanına kaydetme işlemini gerçekleştirin
+    // ...
+
+    // Başarılı kayıt sonrası başka bir sayfaya yönlendirme veya başka bir işlem yapma
+    // ...
+
+    return Ok();
+}
+
+CREATE TABLE Person (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    FirstName VARCHAR(50) NOT NULL,
+    LastName VARCHAR(50) NOT NULL,
+    Age INT UNSIGNED CHECK (Age >= 0 AND Age <= 150)
+);
+
