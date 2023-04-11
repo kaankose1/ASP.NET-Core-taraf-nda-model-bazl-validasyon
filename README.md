@@ -1,0 +1,1 @@
+# ASP.NET-Core-taraf-nda-model-bazl-validasyon
